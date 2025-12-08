@@ -4,8 +4,6 @@ A modern, production-ready starter template for Next.js 16+, featuring **shadcn/
 
 Designed for performance and scalability, this starter provides a solid foundation for your next web application.
 
-![Next.js Starter](https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png)
-
 ## 🚀 Features
 
 - **Framework**: Next.js 16 (App Router & Turbopack)
