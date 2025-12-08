@@ -33,7 +33,7 @@ export function Hero() {
 
           <p className="text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
             A production-ready template featuring shadcn/ui, Tailwind CSS, 
-            and Framer Motion. Optimized for performance and works perfectly with Pantheon.
+            and Framer Motion. Optimized for performance and works perfectly with Pantheon
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
