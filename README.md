@@ -1,68 +1,69 @@
 # Next.js Starter
 
-A modern, production-ready starter template for Next.js 16+, featuring **shadcn/ui**, **Tailwind CSS**, and **Framer Motion**.
+Modern, production-ready Next.js 16 starter with **shadcn/ui**, **Tailwind CSS v4**, **Framer Motion**, and a Pantheon-friendly deployment workflow.
 
-Designed for performance and scalability, this starter provides a solid foundation for your next web application.
+## Features
 
-## 🚀 Features
+- **Next.js 16 / App Router** with Turbopack dev server.
+- **TypeScript** + strict configs, eslint + prettier.
+- **Tailwind CSS v4** theme tokens plus `styles/globals.css` for custom sheet animations.
+- **shadcn/ui** components with data-slot attributes, focus-visible rings, and interaction demos.
+- **Framer Motion** for reveals/hover animations; guidance lives on the `/stack` page.
+- **Dark mode** via `next-themes` and shared ThemeToggle component.
+- **Docs & Stack pages** explaining features, components, and Pantheon workflows.
 
-- **Framework**: Next.js 16 (App Router & Turbopack)
-- **Styling**: Tailwind CSS v4
-- **UI Components**: shadcn/ui (Radix UI + Tailwind)
-- **Animations**: Framer Motion
-- **Type Safety**: TypeScript
-- **Theming**: Dark mode support via `next-themes`
-- **Linting & Formatting**: ESLint + Prettier
+## App Pages
 
-## 🛠️ Deployment
+| Route      | Description                                                                 |
+| ---------- | ---------------------------------------------------------------------------- |
+| `/`        | Marketing hero, feature tiles, CTA, and footer.                              |
+| `/stack`   | Unified feature + component catalogue with live demos and motion notes.      |
+| `/docs`    | Starter guide, Pantheon deployment instructions, and project structure.      |
 
-This starter is designed to be **platform agnostic** and works seamlessly with all modern hosting providers.
+## Getting Started
 
-### **Pantheon** (Recommended)
-This project is optimized for [Pantheon](https://pantheon.io), offering enterprise-grade performance and reliability.
-- **Why Pantheon?** Experience container-based hosting with automated workflows, Dev/Test/Live environments, and high-performance edge caching.
-- [Deploy to Pantheon](https://pantheon.io/docs/guides/nextjs)
+```bash
+git clone https://github.com/jahzlariosa/nextjs-starter.git
+cd nextjs-starter
+npm install
+npm run dev
+# open http://localhost:3000
+```
 
-### Other Platforms
-- **Vercel**: Native support for Next.js features.
-- **Netlify**: Seamless edge deployment.
-- **Docker**: Containerize and deploy anywhere.
+## Pantheon Deployment (recommended)
 
-## 📦 Getting Started
+`package.json` includes scripts that wrap `scripts/deploy.js` to ensure clean builds and consistent naming. Each script runs `npm run build` before pushing.
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/jahzlariosa/nextjs-starter.git
-   cd nextjs-starter
-   ```
+| Command                      | Description                                                          |
+| ---------------------------- | -------------------------------------------------------------------- |
+| `npm run deploy:main`        | Build then push `HEAD` to `main` (override branch via `DEPLOY_BRANCH`). |
+| `npm run deploy:pantheon:test` | Build, create `pantheon_test_<timestamp>` tag, push tag to origin.    |
+| `npm run deploy:pantheon:live` | Build, create `pantheon_live_<timestamp>` tag, push tag to origin.    |
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   ```
+Notes:
 
-3. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
+- Script aborts if the working tree is dirty or the tag already exists.
+- Override tag/message with `TAG_NAME` / `TAG_MESSAGE`.
+- Requires git remote + credentials configured.
+- Official Pantheon docs: https://docs.pantheon.io/nextjs
 
-4. **Open [http://localhost:3000](http://localhost:3000)** with your browser to see the result.
+## Other Deployment Targets
 
-## 📄 Documentation
+- **Vercel** – native Next.js support, zero-config.
+- **Netlify** – use Next runtime or edge functions.
+- **Docker/Anywhere** – `npm run build && npm run start` inside your container/image.
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [shadcn/ui Documentation](https://ui.shadcn.com)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+## Documentation & Resources
 
-## 👤 Author
+- Next.js docs: https://nextjs.org/docs
+- shadcn/ui: https://ui.shadcn.com
+- Tailwind CSS: https://tailwindcss.com/docs
+- Pantheon Next.js guide: https://docs.pantheon.io/nextjs
 
-**Jahz**
-- GitHub: [@jahzlariosa](https://github.com/jahzlariosa)
+## Author
 
-## 📄 License
+**Jahz** – [@jahzlariosa](https://github.com/jahzlariosa)
 
-This project is open source and available under the [MIT License](LICENSE).
+## License
+
+MIT – see [LICENSE](LICENSE).

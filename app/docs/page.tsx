@@ -1,6 +1,7 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CTA } from '@/components/features/home/cta';
 import { Footer } from '@/components/layout/footer';
@@ -50,7 +51,35 @@ const stackItems = [
   'Theme toggle (next-themes)',
 ];
 
+const pantheonDeployScripts = [
+  {
+    command: 'npm run deploy:main',
+    info: 'Build + push HEAD to main (override with DEPLOY_BRANCH).',
+  },
+  {
+    command: 'npm run deploy:pantheon:test',
+    info: 'Build, tag pantheon_test_<timestamp>, push tag.',
+  },
+  {
+    command: 'npm run deploy:pantheon:live',
+    info: 'Build, tag pantheon_live_<timestamp>, push tag.',
+  },
+];
+
 export default function DocsPage() {
+  const [copied, setCopied] = useState('');
+
+  const handleCopy = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(text);
+      setTimeout(() => setCopied(''), 1200);
+    } catch (err) {
+      setCopied('error');
+      setTimeout(() => setCopied(''), 1200);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-500">
       <Navbar />
@@ -68,7 +97,7 @@ export default function DocsPage() {
             </Badge>
             <h1 className="text-4xl sm:text-5xl font-bold">Starter Guide</h1>
             <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
-              Everything you need to install, run, and deploy this Next.js starter—plus links to the
+              Everything you need to install, run, and deploy this Next.js starter, plus links to the
               UI library tweaks we made.
             </p>
             <div className="flex justify-center gap-3">
@@ -87,7 +116,7 @@ export default function DocsPage() {
             <CardHeader>
               <CardTitle className="text-2xl">Install the starter</CardTitle>
               <CardDescription>
-                Choose the path that fits your workflow—`create-next-app` with this repo as the
+                Choose the path that fits your workflowâ€”`create-next-app` with this repo as the
                 template, or a direct clone.
               </CardDescription>
             </CardHeader>
@@ -151,7 +180,7 @@ export default function DocsPage() {
                   href="/stack"
                   className="text-blue-600 dark:text-blue-300 hover:underline font-semibold"
                 >
-                  View component reference →
+                  View component reference &rarr;
                 </Link>
               </div>
               <div className="pt-2 space-y-1">
@@ -161,6 +190,54 @@ export default function DocsPage() {
                   that runs Next.js 16.
                 </p>
               </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="container mx-auto mt-12">
+          <Card className="bg-white/80 dark:bg-zinc-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-xl">Pantheon deployment</CardTitle>
+              <CardDescription>Scripts included for branch and tag-based deploys.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4 text-sm text-slate-700 dark:text-slate-300">
+              <p className="font-semibold">Use the built-in npm scripts (wraps <code>scripts/deploy.js</code>):</p>
+              <div className="space-y-3">
+                {pantheonDeployScripts.map((item) => (
+                  <div
+                    key={item.command}
+                    className="rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/50 p-3"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                      <code className="bg-slate-900 text-slate-100 text-xs rounded-md px-3 py-2 w-full sm:w-auto">
+                        {item.command}
+                      </code>
+                      <button
+                        type="button"
+                        onClick={() => handleCopy(item.command)}
+                        className="inline-flex items-center justify-center rounded-md border border-slate-300 dark:border-slate-700 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                      >
+                        {copied === item.command ? 'Copied!' : 'Copy'}
+                      </button>
+                    </div>
+                    <p className="mt-2 text-xs text-slate-600 dark:text-slate-400">{item.info}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-1">
+                <p>Notes:</p>
+                <p>- Aborts on dirty working tree or existing tag.</p>
+                <p>- Override tag via <code>TAG_NAME</code>, message via <code>TAG_MESSAGE</code>.</p>
+                <p>- Requires git remote + creds configured.</p>
+              </div>
+              <Link
+                href="https://docs.pantheon.io/nextjs"
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-600 dark:text-blue-300 hover:underline font-semibold"
+              >
+                Pantheon Next.js docs &rarr;
+              </Link>
             </CardContent>
           </Card>
         </section>
