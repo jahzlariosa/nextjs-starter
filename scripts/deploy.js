@@ -31,7 +31,8 @@ function ensureCleanWorkingTree() {
 }
 
 function generateTag(prefix) {
-  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace('T', '').slice(0, 15);
+  // Keep only digits from ISO string to avoid invalid characters (., Z, etc.)
+  const stamp = new Date().toISOString().replace(/\D/g, '').slice(0, 14); // YYYYMMDDHHMMSS
   return `${prefix}${stamp}`;
 }
 
