@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "deploy:main": "node scripts/deploy.js main",
     "deploy:pantheon:test": "node scripts/deploy.js pantheon_test",
-    "deploy:pantheon:live": "node scripts/deploy.js pantheon_live"
+    "deploy:pantheon:live": "node scripts/deploy.js pantheon_live",
+    "deploy:pantheon:all": "node scripts/deploy-all.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
