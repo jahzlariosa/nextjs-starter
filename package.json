@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "deploy:main": "node scripts/deploy.js main",
+    "deploy:pantheon:test": "node scripts/deploy.js pantheon_test",
+    "deploy:pantheon:live": "node scripts/deploy.js pantheon_live"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
