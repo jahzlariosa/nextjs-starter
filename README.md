@@ -46,11 +46,13 @@ npm run dev
 | `npm run deploy:main`        | Build then push `HEAD` to `main` (override branch via `DEPLOY_BRANCH`). |
 | `npm run deploy:pantheon:test` | Build, create `pantheon_test_<timestamp>` tag, push tag to origin.    |
 | `npm run deploy:pantheon:live` | Build, create `pantheon_live_<timestamp>` tag, push tag to origin.    |
+| `npm run deploy:pantheon:all`  | Build once, push main, then create/push the Pantheon test + live tags. |
 
 Notes:
 
 - Script aborts if the working tree is dirty or the tag already exists.
 - Override tag/message with `TAG_NAME` / `TAG_MESSAGE`.
+- For `deploy:pantheon:all`, customize with `TAG_NAME_TEST`, `TAG_NAME_LIVE`, `TAG_MESSAGE_TEST`, `TAG_MESSAGE_LIVE`, or skip stages via `SKIP_MAIN`, `SKIP_TEST`, `SKIP_LIVE`. Set `DRY_RUN=1` to preview commands.
 - Requires git remote + credentials configured.
 - Official Pantheon docs: https://docs.pantheon.io/nextjs
 
