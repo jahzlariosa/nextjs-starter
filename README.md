@@ -19,6 +19,13 @@ Modern, production-ready Next.js 16 starter with **shadcn/ui**, **Tailwind CSS v
 | `/`        | Marketing hero, feature tiles, CTA, and footer.                              |
 | `/stack`   | Unified feature + component catalogue with live demos and motion notes.      |
 | `/docs`    | Starter guide, Pantheon deployment instructions, and project structure.      |
+| `/wordpress` | Demo page that calls the WordPress posts API route.                         |
+
+## WordPress GraphQL API
+
+- Endpoints: `GET /api/wordpress/posts` (cursor pagination, search) and `GET /api/wordpress/posts/:slug` (single post with content).
+- Configure: set `WORDPRESS_GRAPHQL_URL` (and optional `WORDPRESS_GRAPHQL_TOKEN`) in `.env.local`.
+- Docs + examples: `docs/wordpress-api.md`.
 
 ## Getting Started
 

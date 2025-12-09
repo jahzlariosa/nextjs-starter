@@ -66,6 +66,46 @@ const pantheonDeployScripts = [
   },
 ];
 
+const wordpressCodeSnippets = [
+  {
+    title: "Shared GraphQL helper",
+    description: "Central fetch utility with timeout + error normalization.",
+    code: `const response = await fetch(endpoint, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    ...(token ? { Authorization: \`Bearer \${token}\` } : {}),
+  },
+  body: JSON.stringify({ query, variables }),
+  cache: "no-store",
+  signal: controller.signal,
+});
+return { data: json?.data, errors: json?.errors, status: response.status };`,
+  },
+  {
+    title: "List API route",
+    description: "Supports search + pagination and maps posts to a trimmed payload.",
+    code: `const { data, errors } = await requestGraphQL({
+  endpoint: WORDPRESS_GRAPHQL_URL ?? DEMO_URL,
+  query: POSTS_QUERY,
+  variables: { first, after, search },
+});
+return NextResponse.json({
+  posts: data.posts.nodes.map(mapWordPressNode),
+  pageInfo: data.posts.pageInfo,
+});`,
+  },
+  {
+    title: "Client list page hooks",
+    description: "Re-usable fetch logic powering search + load more.",
+    code: `const fetchPosts = useCallback(async ({ search, after, append }) => {
+  const res = await fetch(\`/api/wordpress/posts?\${params}\`);
+  const json = await res.json();
+  setPosts((prev) => (append ? [...prev, ...json.posts] : json.posts));
+}, []);`,
+  },
+];
+
 export default function DocsPage() {
   const [copied, setCopied] = useState('');
 
@@ -238,6 +278,54 @@ export default function DocsPage() {
               >
                 Pantheon Next.js docs &rarr;
               </Link>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="container mx-auto mt-12">
+          <Card className="bg-white/80 dark:bg-zinc-900/80 border border-slate-200/80 dark:border-slate-800/80 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-xl">WordPress GraphQL demo</CardTitle>
+              <CardDescription>
+                Explore the built-in CMS integration: search, paginate, and open posts fetched via WordPress GraphQL.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4 text-sm text-slate-700 dark:text-slate-300">
+              <p>
+                The `/wordpress` route showcases a complete headless workflow: our `/api/wordpress/posts`
+                endpoint powers a modern card grid with search, load-more pagination, and deep linking
+                to `/wordpress/[slug]`. Everything falls back to the Pantheon demo endpoint, or you can
+                set <code>WORDPRESS_GRAPHQL_URL</code> in <code>.env.local</code> to point at your site.
+              </p>
+              <p>
+                See <code>docs/wordpress-api.md</code> for request parameters, response shapes, and how to
+                reuse the React components or GraphQL helpers inside your own routes.
+              </p>
+              <div className="grid gap-4 md:grid-cols-3">
+                {wordpressCodeSnippets.map((snippet) => (
+                  <div
+                    key={snippet.title}
+                    className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/40 p-4 shadow-xs"
+                  >
+                    <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">{snippet.title}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{snippet.description}</p>
+                    <pre className="mt-3 rounded-lg bg-slate-900 text-slate-100 text-[0.65rem] leading-relaxed p-3 overflow-x-auto">
+                      <code>{snippet.code}</code>
+                    </pre>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Button asChild>
+                  <Link href="/wordpress">View demo</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href="/api/wordpress/posts">List API</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href="/api/wordpress/posts/hello-world">Single API</Link>
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </section>
