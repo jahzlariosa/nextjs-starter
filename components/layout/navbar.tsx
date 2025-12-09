@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -14,12 +15,14 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center space-x-2"
           >
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold text-foreground">
-              Next.js Starter
-            </span>
+            <Link href="/" className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-primary-foreground" />
+              </div>
+              <span className="text-xl font-bold text-foreground">
+                Next.js Starter
+              </span>
+            </Link>
           </motion.div>
 
           <motion.div 
@@ -27,10 +30,25 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center space-x-4"
           >
+            <Link 
+              href="/stack" 
+              className="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-slate-50 transition-colors"
+            >
+              Stack
+            </Link>
+            <Link 
+              href="/docs" 
+              className="text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-slate-50 transition-colors"
+            >
+              Docs
+            </Link>
             <ThemeToggle />
-            <button className="hidden sm:block px-4 py-2 rounded-lg bg-primary text-primary-foreground font-medium hover:brightness-110 hover:scale-105 transition-all">
+            <Link 
+              href="/stack"
+              className="hidden sm:block px-4 py-2 rounded-lg bg-primary text-primary-foreground font-medium hover:brightness-110 hover:scale-105 transition-all"
+            >
               Get Started
-            </button>
+            </Link>
           </motion.div>
         </div>
       </div>

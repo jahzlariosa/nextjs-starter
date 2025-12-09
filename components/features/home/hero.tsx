@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Github } from 'lucide-react';
 
@@ -37,14 +38,19 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <motion.button
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-lg bg-primary text-primary-foreground font-medium shadow-xl hover:shadow-2xl transition-shadow flex items-center space-x-2"
+              className="w-full sm:w-auto"
             >
-              <span>Get Started</span>
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
+              <Link
+                href="/docs"
+                className="px-8 py-4 rounded-lg bg-primary text-primary-foreground font-medium shadow-xl hover:shadow-2xl transition-shadow flex items-center space-x-2 justify-center"
+              >
+                <span>Get Started</span>
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </motion.div>
             <motion.a
               href="https://github.com/jahzlariosa/nextjs-starter"
               target="_blank"

@@ -114,3 +114,138 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  [data-slot="sheet-content"] {
+    animation-duration: 0.32s;
+    animation-fill-mode: both;
+  }
+
+  [data-slot="sheet-content"][data-side="right"] {
+    transform: translateX(100%);
+  }
+
+  [data-slot="sheet-content"][data-side="right"][data-state="open"] {
+    transform: translateX(0);
+    animation-name: sheet-right-in;
+  }
+
+  [data-slot="sheet-content"][data-side="right"][data-state="closed"] {
+    animation-name: sheet-right-out;
+    animation-duration: 0.24s;
+  }
+
+  [data-slot="sheet-content"][data-side="left"] {
+    transform: translateX(-100%);
+  }
+
+  [data-slot="sheet-content"][data-side="left"][data-state="open"] {
+    transform: translateX(0);
+    animation-name: sheet-left-in;
+  }
+
+  [data-slot="sheet-content"][data-side="left"][data-state="closed"] {
+    animation-name: sheet-left-out;
+    animation-duration: 0.24s;
+  }
+
+  [data-slot="sheet-content"][data-side="top"] {
+    transform: translateY(-100%);
+  }
+
+  [data-slot="sheet-content"][data-side="top"][data-state="open"] {
+    transform: translateY(0);
+    animation-name: sheet-top-in;
+  }
+
+  [data-slot="sheet-content"][data-side="top"][data-state="closed"] {
+    animation-name: sheet-top-out;
+    animation-duration: 0.24s;
+  }
+
+  [data-slot="sheet-content"][data-side="bottom"] {
+    transform: translateY(100%);
+  }
+
+  [data-slot="sheet-content"][data-side="bottom"][data-state="open"] {
+    transform: translateY(0);
+    animation-name: sheet-bottom-in;
+  }
+
+  [data-slot="sheet-content"][data-side="bottom"][data-state="closed"] {
+    animation-name: sheet-bottom-out;
+    animation-duration: 0.24s;
+  }
+
+  @keyframes sheet-right-in {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes sheet-right-out {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes sheet-left-in {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes sheet-left-out {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes sheet-top-in {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes sheet-top-out {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-100%);
+    }
+  }
+
+  @keyframes sheet-bottom-in {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes sheet-bottom-out {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
+    }
+  }
+}

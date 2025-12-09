@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export function CTA() {
@@ -20,13 +21,18 @@ export function CTA() {
             <p className="text-xl mb-8 opacity-90 text-zinc-300">
               Compatible with Pantheon, Vercel, and other modern hosting platforms.
             </p>
-            <motion.button
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-lg bg-white text-zinc-900 font-bold shadow-xl hover:shadow-2xl transition-shadow"
+              className="inline-block"
             >
-              Start Building
-            </motion.button>
+              <Link
+                href="/docs"
+                className="px-8 py-4 rounded-lg bg-white text-zinc-900 font-bold shadow-xl hover:shadow-2xl transition-shadow inline-flex items-center justify-center"
+              >
+                Start Building
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </div>
