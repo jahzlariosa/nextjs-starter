@@ -1,5 +1,3 @@
-import type { NextFetchRequestConfig } from "next/server";
-
 export type GraphQLRequestOptions = {
   endpoint: string;
   query: string;
@@ -8,7 +6,12 @@ export type GraphQLRequestOptions = {
   headers?: Record<string, string>;
   timeoutMs?: number;
   cache?: RequestCache;
-  next?: NextFetchRequestConfig;
+  next?: NextFetchConfig;
+};
+
+type NextFetchConfig = {
+  revalidate?: number | false;
+  tags?: string[];
 };
 
 export type GraphQLError = {
